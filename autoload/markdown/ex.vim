@@ -84,6 +84,13 @@ fu! markdown#ex#open_link(key)
       endif
     elseif uri =~ '\v^http'
       call s:open(uri)
+    elseif uri =~ '\v^#'
+      let pat = substitute(uri, '\v^#', '\\v^#+\\s*', '')
+      let pat = substitute(pat, '-', '[- ]', 'g')
+      let ic = &ic
+      let &ic = 1
+      call search(pat)
+      let &ic = ic
     else
       let dir = fnamemodify(expand('%'), ':h')
       if uri =~ '\v^/'
