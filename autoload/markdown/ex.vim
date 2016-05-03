@@ -71,18 +71,7 @@ fu! markdown#ex#open_link(key)
     endif
   endfor
   if exists('uri')
-    if uri =~ '\v^https://github.com/'
-      let dir = s:clone(uri)
-      if !empty(dir)
-        let wic = &wic
-        let &wic = 1
-        let readmes = split(expand(dir.'/readme.*'), '\n')
-        let &wic = wic
-        if !empty(readmes)
-          exe 'edit '.readmes[0]
-        endif
-      endif
-    elseif uri =~ '\v^http'
+    if uri =~ '\v^http://|^https://'
       call s:open(uri)
     elseif uri =~ '\v^#'
       let pat = substitute(uri, '\v^#', '\\v^#+\\s*', '')
@@ -114,25 +103,6 @@ fu! markdown#ex#link_complete(A, L, P)
     let b:markdown_links = markdown#ex#links()
   endif
   return filter(map(copy(b:markdown_links), 'v:val.title'), 'v:val =~ "^'.a:A.'"')
-endfu
-
-fu! s:clone(uri)
-  if executable('git')
-    let root = get(g:, 'markdown_git_clone_root', expand('~/.ghq'))
-    let root = substitute(root, '\v/+$', '', '')
-    let dir = root.'/'.substitute(a:uri, '\v^https://', '', '')
-    if !isdirectory(dir)
-      let args = get(g:, 'markdown_git_clone_args', '--depth 1')
-      redraw!
-      echo "Cloning from '".a:uri."' into '".dir."'..."
-      call system('git clone '.args.' '.a:uri.' '.dir)
-      echo "Cloning from '".a:uri."' into '".dir."'...DONE"
-    endif
-    return dir
-  else
-    echoe 'Git must be installed'
-    return ''
-  endif
 endfu
 
 fu! s:open(url)
