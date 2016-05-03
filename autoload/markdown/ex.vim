@@ -28,27 +28,26 @@ fu! markdown#ex#foldtext()
   return substitute(line, '\v\[(.*)\]\(.*\)', '\1', 'g')
 endfu
 
-" This return value can be applied to setqflist() and setloclist() directly
 fu! markdown#ex#links(...)
   let start = a:0 > 0 ? a:1 : 0
   let end = a:0 > 1 ? a:2 : line('$')
   let filter = a:0 > 2 ? a:3 : ''
-
   let lines = getline(start, end)
+  return filter(s:links(lines), 'v:val.uri =~ "^'.filter.'"')
+endfu
+
+fu! s:links(lines)
+  let i = 0
+  let len = len(a:lines)
   let result = []
   let pat =  '\v\[([^\]]+)\]\(([^\)]+)\)'
-  let i = 0
-  let len = len(lines)
-  let bufnr = bufnr('%')
   while i < len
-    let seg = matchstr(lines[i], pat)
+    let seg = matchstr(a:lines[i], pat)
     if !empty(seg)
       let key = substitute(seg, pat, '\1', '')
       let val = substitute(seg, pat, '\2', '')
-      if val =~ filter
-        let item = { 'bufnr': bufnr, 'lnum': i + 1, 'title': key, 'text': val }
-        call add(result, item)
-      endif
+      let item = { 'title': key, 'uri': val }
+      call add(result, item)
     endif
     let i += 1
   endwhile
@@ -63,12 +62,10 @@ fu! markdown#ex#open_link(key)
   else
     let key = a:key
   endif
-  if !exists('b:markdown_links')
-    let b:markdown_links = markdown#ex#links()
-  endif
-  for link in b:markdown_links
+  let links = markdown#ex#links()
+  for link in links
     if link.title == key
-      let uri = link.text
+      let uri = link.uri
       break
     endif
   endfor
@@ -101,10 +98,8 @@ fu! markdown#ex#open_link(key)
 endfu
 
 fu! markdown#ex#link_complete(A, L, P)
-  if !exists('b:markdown_links')
-    let b:markdown_links = markdown#ex#links()
-  endif
-  return filter(map(copy(b:markdown_links), 'v:val.title'), 'v:val =~ "^'.a:A.'"')
+  let links = markdown#ex#links()
+  return filter(map(copy(links), 'v:val.title'), 'v:val =~ "^'.a:A.'"')
 endfu
 
 fu! s:open(url)
