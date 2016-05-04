@@ -50,4 +50,3 @@ endfu
 ## TODO
 
 + Write a document
-+ Create some text-objects (for fenced code blocks or something else).
