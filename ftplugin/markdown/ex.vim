@@ -48,9 +48,9 @@ if !hasmapto('<Plug>(markdown-ex-search-link-backward)') && maparg('<leader>?', 
   nmap <buffer> <leader>? <Plug>(markdown-ex-search-link-backward)
 endif
 
-xnoremap <silent> i` :<c-u>call markdown#ex#text_object(1)<cr>
-onoremap <silent> i` :<c-u>call markdown#ex#text_object(1)<cr>
-xnoremap <silent> a` :<c-u>call markdown#ex#text_object(0)<cr>
-onoremap <silent> a` :<c-u>call markdown#ex#text_object(0)<cr>
+xnoremap <silent> <buffer> i` :<c-u>call markdown#ex#text_object(1)<cr>
+onoremap <silent> <buffer> i` :<c-u>call markdown#ex#text_object(1)<cr>
+xnoremap <silent> <buffer> a` :<c-u>call markdown#ex#text_object(0)<cr>
+onoremap <silent> <buffer> a` :<c-u>call markdown#ex#text_object(0)<cr>
 
 setlocal foldtext=markdown#ex#foldtext()
