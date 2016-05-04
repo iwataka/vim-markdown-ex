@@ -22,5 +22,3 @@ silent! call repeat#set("\<Plug>(markdown-ex-toggle-checkbox)")
 silent! call repeat#set("\<Plug>(markdown-ex-toggle-checkbox-line)")
 
 setlocal foldtext=markdown#ex#foldtext()
-com! -nargs=? -complete=customlist,markdown#ex#link_complete MarkdownOpenLink
-      \ call markdown#ex#open_link(<q-args>)
