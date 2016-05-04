@@ -55,7 +55,7 @@ fu! s:open_link(uri)
     let pat = substitute(pat, '-', '[- ]', 'g')
     let ic = &ic
     let &ic = 1
-    call search(pat, 'w')
+    call search(pat, 'sw')
     let &ic = ic
   else
     let dir = fnamemodify(expand('%'), ':h')

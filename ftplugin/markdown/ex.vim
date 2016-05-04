@@ -22,9 +22,9 @@ silent! call repeat#set("\<Plug>(markdown-ex-toggle-checkbox)")
 silent! call repeat#set("\<Plug>(markdown-ex-toggle-checkbox-line)")
 
 nnoremap <silent> <buffer> <Plug>(markdown-ex-next-link)
-      \ :<c-u>call markdown#ex#next_link('w')<cr>
+      \ :<c-u>call markdown#ex#next_link('sw')<cr>
 nnoremap <silent> <buffer> <Plug>(markdown-ex-prev-link)
-      \ :<c-u>call markdown#ex#next_link('bw')<cr>
+      \ :<c-u>call markdown#ex#next_link('bsw')<cr>
 nnoremap <silent> <buffer> <Plug>(markdown-ex-open-link)
       \ :<c-u>call markdown#ex#open_link()<cr>
 
