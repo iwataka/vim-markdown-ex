@@ -34,7 +34,7 @@ endif
 if !hasmapto('<Plug>(markdown-ex-prev-link)') && maparg('<c-p>', 'n') ==# ''
   nmap <silent> <buffer> <c-p> <Plug>(markdown-ex-prev-link)
 endif
-if !hasmapto('<Plug>(markdown-ex-open-link)') && maparg('gx', 'n') ==# ''
+if !hasmapto('<Plug>(markdown-ex-open-link)')
   nmap <silent> <buffer> gx <Plug>(markdown-ex-open-link)
 endif
 
