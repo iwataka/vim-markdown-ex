@@ -20,11 +20,11 @@ fu! markdown#link#complete(A, L, P)
 endfu
 
 fu! s:init(expr)
-  let s:expr = empty(a:expr) ? bufnr('%') : a:expr
-  if bufexists(s:expr)
-    let lines = getbufline(s:expr, 0, '$')
-  elseif filereadable(s:expr)
-    let lines = readfile(s:expr)
+  let s:target = empty(a:expr) ? bufnr('%') : a:expr
+  if bufexists(s:target)
+    let lines = getbufline(s:target, 0, '$')
+  elseif filereadable(s:target)
+    let lines = readfile(s:target)
   endif
   if exists('lines')
     let s:links = s:links(lines)
@@ -34,10 +34,10 @@ fu! s:init(expr)
 endfu
 
 fu! s:edit()
-  if bufexists(s:expr)
-    exe 'buffer '.s:expr
-  elseif filereadable(s:expr)
-    exe 'edit '.s:expr
+  if bufexists(s:target)
+    exe 'buffer '.s:target
+  elseif filereadable(s:target)
+    exe 'edit '.s:target
   else
     throw 'Invalid expression'
   endif
@@ -75,7 +75,8 @@ fu! s:open_link(uri)
     call search(pat)
     let &ic = ic
   else
-    let dir = fnamemodify(expand('%'), ':h')
+    let dir = s:cwd()
+    echom 'dir' dir
     if uri =~ '\v^/'
       let root = s:root(dir)
       if empty(root)
@@ -103,10 +104,11 @@ fu! s:open(url)
   call system(cmd.' '.a:url)
 endfu
 
-fu! s:root(cwd)
+fu! s:root()
+  let cwd = s:cwd()
   let rmarkers = ['.git', '.hg', '.svn', '.bzr', '_darcs']
   for mark in rmarkers
-    let rdir = finddir(mark, a:cwd.';')
+    let rdir = finddir(mark, cwd.';')
     if !empty(rdir)
       return fnamemodify(rdir, ':h')
     endif
@@ -133,4 +135,13 @@ fu! s:links(lines)
     let i += 1
   endwhile
   return result
+endfu
+
+fu! s:cwd()
+  let bufname = filereadable(s:target) ? s:target : bufname(s:target)
+  if filereadable(bufname)
+    return fnamemodify(bufname, ':h')
+  else
+    return getcwd()
+  endif
 endfu
