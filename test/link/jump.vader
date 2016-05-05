@@ -1,0 +1,30 @@
+Given markdown:
+  [Title1](URL1)
+  Text1
+  [Title2](URL2)
+  Text2
+
+Do (Delete second URL):
+  2\<C-N>di)
+
+Expect markdown:
+  [Title1](URL1)
+  Text1
+  [Title2]()
+  Text2
+
+Given markdown:
+  [Title1](URL1)
+  Text1
+  [Title2](URL2)
+  Text2
+
+Do (Delete first URL):
+  G2\<C-P>di)
+
+Expect markdown:
+  [Title1]()
+  Text1
+  [Title2](URL2)
+  Text2
+

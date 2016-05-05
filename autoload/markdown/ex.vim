@@ -30,8 +30,12 @@ fu! markdown#ex#foldtext()
   return substitute(line, '\v\[(.*)\]\(.*\)', '\1', 'g')
 endfu
 
-fu! markdown#ex#next_link(flags)
-  call search(s:linkpat, a:flags)
+fu! markdown#ex#next_link(flags, count)
+  let i = 0
+  while i < a:count
+    call search(s:linkpat, a:flags)
+    let i += 1
+  endwhile
 endfu
 
 fu! markdown#ex#open_link()
