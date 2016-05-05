@@ -25,3 +25,4 @@ Please check `:help vim-markdown-ex` to see more details.
 + [tpope/vim-markdown](https://github.com/tpope/vim-markdown)
 + [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 + [gabrielelana/vim-markdown](https://github.com/gabrielelana/vim-markdown)
++ [pocke/vim-textobj-markdown](https://github.com/pocke/vim-textobj-markdown)
