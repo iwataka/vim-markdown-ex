@@ -6,7 +6,9 @@ TOC                                                   *vim-markdown-ex-contents*
 
     INTRO .......................... |vim-markdown-ex-intro|
     USAGE .......................... |vim-markdown-ex-usage|
-    COMMANDS ....................... |vim-markdown-ex-commands|
+        CHECKBOX ................... |vim-markdown-ex-usage-checkbox|
+        LINK ....................... |vim-markdown-ex-usage-link|
+        TEXT-OBJECT ................ |vim-markdown-ex-usage-text-object|
 
 ==============================================================================
 INTRO                                                    *vim-markdown-ex-intro*
@@ -19,8 +21,38 @@ appropriate way.
 ==============================================================================
 USAGE                                                    *vim-markdown-ex-usage*
 
-==============================================================================
-COMMAND                                               *vim-markdown-ex-commands*
+All these mappings and commands are available only for markdown buffers.
+
+------------------------------------------------------------------------------
+CHECKBOX                                        *vim-markdown-ex-usage-checkbox*
+
+gC{motion}             Create/Toggle/Remove checkboxes that {motion} moves over.
+
+gCC                    Create/Toggle/Remove [count] checkboxes.
+
+{Visual}gC             Create/Toggle/Remove checkboxes on the highlighted lines.
+
+:[range]CheckboxToggle Create/Toggle/Remove checkboxes on [range] lines.
+>
+    The above 3 mappings can be repeated by dot if you use tpope's vim-repeat
+    https://github.com/tpope/vim-repeat
+<
+------------------------------------------------------------------------------
+LINK                                                *vim-markdown-ex-usage-link*
+
+<C-N>                  Jump to the next link.
+
+<C-P>                  Jump to the previous link.
+
+gx                     Open the URI on the current line with some additional
+                       features.
+
+------------------------------------------------------------------------------
+TEXT-OBJECT                                  *vim-markdown-ex-usage-text-object*
+
+i`                     "a quoted string" or "a fenced code block"
+
+a`                     "inner quoted string" or "inner fenced code block"
 
 ==============================================================================
 vim:tw=78
