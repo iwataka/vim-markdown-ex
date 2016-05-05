@@ -87,7 +87,7 @@ fu! s:open(url)
   elseif has('win32')
     let cmd = 'rundll32 url.dll,FileProtocolHandler'
   endif
-  call system(cmd.' '.a:url)
+  call system(cmd.' '.shellescape(a:url))
 endfu
 
 fu! s:root(cwd)
