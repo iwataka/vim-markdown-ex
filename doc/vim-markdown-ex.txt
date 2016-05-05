@@ -1,0 +1,26 @@
+*vim-markdown-ex.txt* Extra useful functionalities for markdown editing
+*vim-markdown-ex*
+
+==============================================================================
+TOC                                                   *vim-markdown-ex-contents*
+
+    INTRO .......................... |vim-markdown-ex-intro|
+    USAGE .......................... |vim-markdown-ex-usage|
+    COMMANDS ....................... |vim-markdown-ex-commands|
+
+==============================================================================
+INTRO                                                    *vim-markdown-ex-intro*
+
+Markdown-style documents now becomes more and more important and many helper
+plugins have been created, but they aren't enough intuitive and useful at least
+for me. I carefully select really necessary features and implement them in
+appropriate way.
+
+==============================================================================
+USAGE                                                    *vim-markdown-ex-usage*
+
+==============================================================================
+COMMAND                                               *vim-markdown-ex-commands*
+
+==============================================================================
+vim:tw=78

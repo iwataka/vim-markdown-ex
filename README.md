@@ -1,52 +1,37 @@
 # Markdown-EX
 
-Extra functionalities for markdown!
+Extra useful functionalities for markdown editing!
 
-## Functions
+## Introduction
 
-+ markdown#ex#toggle_checkbox(linenr)
+Markdown-style documents now becomes more and more important and many helper
+plugins have been created, but they aren't enough intuitive and useful at least
+for me. I carefully select really necessary features and implement them in
+appropriate way.
 
-    Toggles (or create if not exists) checkbox on the specified line.
+## Usage
 
-+ markdown#ex#remove_checkbox(linenr)
++ Create/Toggle/Remove checkboxes
 
-    Removes checkbox on the specified line.
+    - By default, you can run `:CheckboxToggle` command or type `gCC` to create/toggle/remove a checkbox on the current line.
+    - Both ways can accept visual selection.
+    - `gCC` mapping can be repeated by dot if you use [vim-repeat](https://gihtub.com/tpope/vim-repeat).
 
-+ markdown#ex#foldtext()
++ Jump to next/previous links
 
-    foldtext() function for markdown.
-    See `:help foldtext()`.
+    - By default, `<c-n>` to jump to the next link and `<c-p>` to jump to the previous one.
 
-+ markdown#ex#links(...)
++ Open links by gx with additional features
 
-    Extracts links from the current markdown buffer
+    - Try to find URL on the current line even if the cursor is not on it.
+    - Support header jumps (e.g. `[Title](#title)`).
 
-## Configuration
++ Text object for fenced code blocks
 
-Here is my configuration:
+    `` i` `` and `` a` `` indicate not only built-in text objects but also fenced code blocks.
 
-```vim
-if has('autocmd')
-  augroup vimrc-markdown
-    autocmd FileType markdown nnoremap <buffer>
-          \ <cr> :<c-u>call markdown#ex#toggle_checkbox(line('.'))<cr>
-    autocmd FileType markdown nnoremap <buffer>
-          \ <s-cr> :<c-u>call markdown#ex#remove_checkbox(line('.'))<cr>
-    if exists('g:markdown_folding')
-      autocmd FileType markdown
-            \ setlocal foldtext=markdown#ex#foldtext()
-    endif
-    autocmd FileType markdown com! -nargs=? MarkdownShowLinks
-          \ call s:markdown_show_links(<q-args>)
-  augroup END
-endif
+## Related Projects
 
-fu! s:markdown_show_links(filter)
-  call setqflist(markdown#ex#links(0, line('$'), a:filter))
-  cwindow
-endfu
-```
-
-## TODO
-
-+ Write a document
++ [tpope/vim-markdown](https://github.com/tpope/vim-markdown)
++ [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
++ [gabrielelana/vim-markdown](https://github.com/gabrielelana/vim-markdown)
