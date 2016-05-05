@@ -38,9 +38,9 @@ if !hasmapto('<Plug>(markdown-ex-open-link)')
   nmap <silent> <buffer> gx <Plug>(markdown-ex-open-link)
 endif
 
-xnoremap <silent> <buffer> i` :<c-u>call markdown#ex#text_object(1)<cr>
-onoremap <silent> <buffer> i` :<c-u>call markdown#ex#text_object(1)<cr>
-xnoremap <silent> <buffer> a` :<c-u>call markdown#ex#text_object(0)<cr>
-onoremap <silent> <buffer> a` :<c-u>call markdown#ex#text_object(0)<cr>
+xnoremap <silent> <buffer> ic :<c-u>call markdown#ex#text_object(1)<cr>
+onoremap <silent> <buffer> ic :<c-u>call markdown#ex#text_object(1)<cr>
+xnoremap <silent> <buffer> ac :<c-u>call markdown#ex#text_object(0)<cr>
+onoremap <silent> <buffer> ac :<c-u>call markdown#ex#text_object(0)<cr>
 
 setlocal foldtext=markdown#ex#foldtext()

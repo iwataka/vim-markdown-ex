@@ -98,38 +98,22 @@ fu! s:root(cwd)
 endfu
 
 fu! markdown#ex#text_object(inner)
-  let line = getline(line('.'))
-  let cnum = col('.')
-  let list = []
-  let len = len(line)
+  let cols = []
+  let lines = getline(0, '$')
+  let lnum = line('.')
+  let len = len(lines)
   let i = 0
   while i < len
-    let c = line[i]
-    if c == '`'
-      call add(list, i + 1)
+    let line = lines[i]
+    if line =~ '\v^```'
+      call add(cols, i + 1)
     endif
     let i += 1
   endwhile
-  let [n1, n2] = s:between(list, cnum)
+  let [n1, n2] = s:between(cols, lnum)
+  let flag = a:inner ? 1 : 0
   if n1 > 0
-    exe 'normal! '.(a:inner ? 'vi`' : 'va`')
-  else
-    let lines = getline(0, '$')
-    let lnum = line('.')
-    let len = len(lines)
-    let i = 0
-    while i < len
-      let line = lines[i]
-      if line =~ '\v^```'
-        call add(list, i + 1)
-      endif
-      let i += 1
-    endwhile
-    let [n1, n2] = s:between(list, lnum)
-    let flag = a:inner ? 1 : 0
-    if n1 > 0
-      execute printf('normal! %dGV%dG', n1 + flag, n2 - flag)
-    endif
+    execute printf('normal! %dGV%dG', n1 + flag, n2 - flag)
   endif
 endfu
 

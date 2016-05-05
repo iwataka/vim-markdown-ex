@@ -50,9 +50,9 @@ gx                     Open the URI on the current line with some additional
 ------------------------------------------------------------------------------
 TEXT-OBJECT                                  *vim-markdown-ex-usage-text-object*
 
-i`                     "a quoted string" or "a fenced code block"
+ic                     "a quoted string" or "a fenced code block"
 
-a`                     "inner quoted string" or "inner fenced code block"
+ac                     "inner quoted string" or "inner fenced code block"
 
 ==============================================================================
 vim:tw=78

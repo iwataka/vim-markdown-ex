@@ -1,0 +1,29 @@
+Given markdown:
+  Example code:
+  ```vim
+  function! HelloWorld()
+    echo 'Hello, World!'
+  endfunction
+  ```
+
+Do (Delete inner code fenced block):
+  jdic
+
+Expect markdown:
+  Example code:
+  ```vim
+  ```
+
+Given markdown:
+  Example code:
+  ```vim
+  function! HelloWorld()
+    echo 'Hello, World!'
+  endfunction
+  ```
+
+Do (Delete a code fenced block):
+  jdac
+
+Expect markdown:
+  Example code:
