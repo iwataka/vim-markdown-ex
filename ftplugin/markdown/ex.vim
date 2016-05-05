@@ -38,16 +38,6 @@ if !hasmapto('<Plug>(markdown-ex-open-link)')
   nmap <silent> <buffer> gx <Plug>(markdown-ex-open-link)
 endif
 
-exe 'nnoremap <buffer> <Plug>(markdown-ex-search-link-forward) /\v\c\[\zs\ze[^\]]*\]\([^\)]+\)<Home>'.repeat('<Right>', 9)
-exe 'nnoremap <buffer> <Plug>(markdown-ex-search-link-backward) ?\v\c\[\zs\ze[^\]]*\]\([^\)]+\)<Home>'.repeat('<Right>', 9)
-
-if !hasmapto('<Plug>(markdown-ex-search-link-forward)') && maparg('<leader>/', 'n') ==# ''
-  nmap <buffer> <leader>/ <Plug>(markdown-ex-search-link-forward)
-endif
-if !hasmapto('<Plug>(markdown-ex-search-link-backward)') && maparg('<leader>?', 'n') ==# ''
-  nmap <buffer> <leader>? <Plug>(markdown-ex-search-link-backward)
-endif
-
 xnoremap <silent> <buffer> i` :<c-u>call markdown#ex#text_object(1)<cr>
 onoremap <silent> <buffer> i` :<c-u>call markdown#ex#text_object(1)<cr>
 xnoremap <silent> <buffer> a` :<c-u>call markdown#ex#text_object(0)<cr>
