@@ -1,0 +1,38 @@
+Given markdown:
+  + Item1
+  + Item2
+  + Item3
+
+Do (Create checkboxes on each line by 3gCC):
+  3gCC
+
+Expect markdown:
+  + [ ] Item1
+  + [ ] Item2
+  + [ ] Item3
+
+Given markdown:
+  + Item1
+  + Item2
+  + Item3
+
+Do (Create checkboxes on each line by vipgC):
+  vipgC
+
+Expect markdown:
+  + [ ] Item1
+  + [ ] Item2
+  + [ ] Item3
+
+Given markdown:
+  + Item1
+  + Item2
+  + Item3
+
+Do (Create checkboxes on each line by vip:CheckboxToggle\<Enter>):
+  vip:CheckboxToggle\<Enter>
+
+Expect markdown:
+  + [ ] Item1
+  + [ ] Item2
+  + [ ] Item3
