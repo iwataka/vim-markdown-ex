@@ -28,3 +28,4 @@ Please check `:help vim-markdown-ex` to see more details.
 + [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 + [gabrielelana/vim-markdown](https://github.com/gabrielelana/vim-markdown)
 + [pocke/vim-textobj-markdown](https://github.com/pocke/vim-textobj-markdown)
++ [vim-checkbox](https://github.com/jkramer/vim-checkbox)
