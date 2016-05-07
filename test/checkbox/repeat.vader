@@ -1,0 +1,12 @@
+Given markdown:
+  + Item1
+  + Item2
+  + Item3
+
+Do (Create checkboxes and dot repeat on first line):
+  gCC.
+
+Expect markdown:
+  + [x] Item1
+  + Item2
+  + Item3
