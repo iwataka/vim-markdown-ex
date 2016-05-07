@@ -34,9 +34,30 @@ if !hasmapto('<Plug>(markdown-ex-open-link)')
   nmap <buffer> gx <Plug>(markdown-ex-open-link)
 endif
 
-xnoremap <silent> <buffer> ic :<c-u>call markdown#ex#text_object(1)<cr>
-onoremap <silent> <buffer> ic :<c-u>call markdown#ex#text_object(1)<cr>
-xnoremap <silent> <buffer> ac :<c-u>call markdown#ex#text_object(0)<cr>
-onoremap <silent> <buffer> ac :<c-u>call markdown#ex#text_object(0)<cr>
+xnoremap <silent> <buffer> <Plug>(markdown-ex-textobj-code-block-i)
+      \ :<c-u>call markdown#ex#text_object(1)<cr>
+onoremap <silent> <buffer> <Plug>(markdown-ex-textobj-code-block-i)
+      \ :<c-u>call markdown#ex#text_object(1)<cr>
+xnoremap <silent> <buffer> <Plug>(markdown-ex-textobj-code-block-a)
+      \ :<c-u>call markdown#ex#text_object(0)<cr>
+onoremap <silent> <buffer> <Plug>(markdown-ex-textobj-code-block-a)
+      \ :<c-u>call markdown#ex#text_object(0)<cr>
+
+if !hasmapto('<Plug>(markdown-ex-textobj-code-block-i)')
+  if maparg('ic', 'x') ==# ''
+    xmap <buffer> ic <Plug>(markdown-ex-textobj-code-block-i) ==# ''
+  endif
+  if maparg('ic', 'o') ==# ''
+    omap <buffer> ic <Plug>(markdown-ex-textobj-code-block-i)
+  endif
+endif
+if !hasmapto('<Plug>(markdown-ex-textobj-code-block-a)')
+  if maparg('ac', 'x') ==# ''
+    xmap <buffer> ac <Plug>(markdown-ex-textobj-code-block-a)
+  endif
+  if maparg('ac', 'o') ==# ''
+    omap <buffer> ac <Plug>(markdown-ex-textobj-code-block-a)
+  endif
+endif
 
 setlocal foldtext=markdown#ex#foldtext()
