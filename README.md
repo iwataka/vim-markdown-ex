@@ -1,5 +1,7 @@
 # Markdown-EX
 
+![travis-ci](https://travis-ci.org/iwataka/vim-markdown-ex.svg?branch=master)
+
 Extra useful functionalities for markdown editing!
 
 ## Introduction
