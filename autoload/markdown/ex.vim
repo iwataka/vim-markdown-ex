@@ -40,10 +40,22 @@ endfu
 
 fu! markdown#ex#open_link()
   let line = getline(line('.'))
-  let text = matchstr(line, s:linkpat, col('.'))
-  if empty(text)
-    let text = matchstr(line, s:linkpat)
-  endif
+  let len = len(line)
+  let col = col('.')
+  let dist = len(line)
+  let text = ''
+  let end = 0
+  while 1
+    let [txt, start, end] = matchstrpos(line, s:linkpat, end)
+    if empty(txt)
+      break
+    endif
+    let dst = col < start ? start - col : col <= end ? 0 : col - end
+    if dst < dist
+      let dist = dst
+      let text = txt
+    endif
+  endwhile
   if !empty(text)
     let uri = substitute(text, s:linkpat, '\2', '')
     call s:open_link(uri)

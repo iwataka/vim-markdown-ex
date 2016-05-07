@@ -44,8 +44,7 @@ LINK                                                *vim-markdown-ex-usage-link*
 
 <C-P>                  Jump to the previous link.
 
-gx                     Open the URI on the current line with some additional
-                       features.
+gx                     Open the nearest URI on the current line.
 
 ------------------------------------------------------------------------------
 TEXT-OBJECT                                  *vim-markdown-ex-usage-text-object*
