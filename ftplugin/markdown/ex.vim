@@ -9,9 +9,9 @@ nnoremap <silent> <buffer> <Plug>(markdown-ex-toggle-checkbox-line)
 com! -buffer -range -bar CheckboxToggle call markdown#ex#toggle_checkbox(<line1>, <line2>)
 
 if !hasmapto('<Plug>(markdown-ex-toggle-checkbox)') && maparg('gC', 'n') ==# ''
-  xmap gC <Plug>(markdown-ex-toggle-checkbox)
-  nmap gC <Plug>(markdown-ex-toggle-checkbox)
-  nmap gCC <Plug>(markdown-ex-toggle-checkbox-line)
+  xmap <buffer> gC <Plug>(markdown-ex-toggle-checkbox)
+  nmap <buffer> gC <Plug>(markdown-ex-toggle-checkbox)
+  nmap <buffer> gCC <Plug>(markdown-ex-toggle-checkbox-line)
 endif
 
 silent! call repeat#set("\<Plug>(markdown-ex-toggle-checkbox)")
@@ -25,13 +25,13 @@ nnoremap <silent> <buffer> <Plug>(markdown-ex-open-link)
       \ :<c-u>call markdown#ex#open_link()<cr>
 
 if !hasmapto('<Plug>(markdown-ex-next-link)') && maparg('<c-n>', 'n') ==# ''
-  nmap <silent> <buffer> <c-n> <Plug>(markdown-ex-next-link)
+  nmap <buffer> <c-n> <Plug>(markdown-ex-next-link)
 endif
 if !hasmapto('<Plug>(markdown-ex-prev-link)') && maparg('<c-p>', 'n') ==# ''
-  nmap <silent> <buffer> <c-p> <Plug>(markdown-ex-prev-link)
+  nmap <buffer> <c-p> <Plug>(markdown-ex-prev-link)
 endif
 if !hasmapto('<Plug>(markdown-ex-open-link)')
-  nmap <silent> <buffer> gx <Plug>(markdown-ex-open-link)
+  nmap <buffer> gx <Plug>(markdown-ex-open-link)
 endif
 
 xnoremap <silent> <buffer> ic :<c-u>call markdown#ex#text_object(1)<cr>
