@@ -1,7 +1,3 @@
-if exists('b:did_ftplugin')
-  finish
-endif
-
 " This imitates tpope's vim-commentary
 " https://github.com/tpope/vim-commentary
 xnoremap <silent> <buffer> <Plug>(markdown-ex-toggle-checkbox)
