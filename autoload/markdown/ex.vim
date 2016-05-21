@@ -68,7 +68,9 @@ fu! s:open_link(uri)
     call s:open(uri)
   elseif uri =~ '\v^#'
     let pat = substitute(uri, '\v^#', '\\v^#+\\s*', '')
-    let pat = substitute(pat, '-', '[- ]', 'g')
+    let pat = substitute(pat, '--', '\\A*', 'g')
+    let pat = substitute(pat, '-', '\\A*', 'g')
+    let pat = substitute(pat, '$', '\\A*', '')
     let ic = &ic
     let &ic = 1
     call search(pat, 'sw')
