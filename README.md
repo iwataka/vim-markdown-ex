@@ -18,6 +18,7 @@ This provides the below features:
 + Create/Toggle/Remove checkboxes
 + Jump to next/previous links
 + Open links by gx with additional features
++ Open links from opening history
 + Text object for fenced code blocks
 + Search headers with command-completion
 

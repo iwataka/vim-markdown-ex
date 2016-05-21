@@ -47,6 +47,8 @@ LINK                                                *vim-markdown-ex-usage-link*
 
 gx                     Open the nearest URI on the current line.
 
+:OpenLinkHistory       Open links from opening history
+
 ------------------------------------------------------------------------------
 TEXT-OBJECT                                  *vim-markdown-ex-usage-text-object*
 

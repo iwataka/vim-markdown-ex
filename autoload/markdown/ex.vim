@@ -1,7 +1,18 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:linkpat = '\v\[([^\]]+)\]\(\zs([^\)]+)\ze\)'
+if !exists('g:markdown_ex_link_history_path')
+  let g:markdown_ex_link_history_path = expand('~/.cache/vim-markdown-ex/history.txt')
+  if !isdirectory(fnamemodify(g:markdown_ex_link_history_path, ':h'))
+    call mkdir(fnamemodify(g:markdown_ex_link_history_path, ':h'), 'p')
+  endif
+endif
+if !exists('g:markdown_ex_link_history_max')
+  let g:markdown_ex_link_history_max = 100
+endif
+
+let s:search_linkpat = '\v\[([^\]]+)\]\(\zs([^\)]+)\ze\)'
+let s:linkpat = '\v\[([^\]]+)\]\(([^\)]+)\)'
 
 fu! markdown#ex#toggle_checkbox(type, ...)
   if a:0
@@ -33,7 +44,7 @@ endfu
 fu! markdown#ex#next_link(flags, count)
   let i = 0
   while i < a:count
-    call search(s:linkpat, a:flags)
+    call search(s:search_linkpat, a:flags)
     let i += 1
   endwhile
 endfu
@@ -57,14 +68,19 @@ fu! markdown#ex#open_link()
     endif
   endwhile
   if !empty(text)
-    let uri = substitute(text, s:linkpat, '\2', '')
-    call s:open_link(uri)
+    call s:open_link(text)
   endif
 endfu
 
-fu! s:open_link(uri)
-  let uri = a:uri
+fu! s:open_link(text)
+  let uri = substitute(a:text, s:linkpat, '\2', '')
   if uri =~ '\v^http://|^https://'
+    call s:assure_link_history()
+    let item = {
+          \ 'title': substitute(a:text, s:linkpat, '\1', ''),
+          \ 'uri': substitute(a:text, s:linkpat, '\2', '')
+          \ }
+    call insert(s:link_history, item, 0)
     call s:open(uri)
   elseif uri =~ '\v^#'
     let pat = substitute(uri, '\v^#', '\\v^#+\\s*', '')
@@ -88,6 +104,20 @@ fu! s:open_link(uri)
       let uri = dir.'/'.uri
     endif
     exe 'edit '.uri
+  endif
+endfu
+
+fu! s:assure_link_history()
+  if !exists('s:link_history')
+    let lines = filereadable(g:markdown_ex_link_history_path) ?
+          \ readfile(g:markdown_ex_link_history_path) : []
+    let str = empty(lines) ? '[]' : join(lines, '')
+    let s:link_history = eval(str)
+    augroup vim_markdown_ex
+      autocmd!
+      autocmd VimLeavePre *
+            \ call writefile([string(s:link_history)], g:markdown_ex_link_history_path)
+    augroup END
   endif
 endfu
 
@@ -163,6 +193,31 @@ endfu
 
 fu! markdown#ex#complete_header(A, L, P)
   return filter(copy(s:headers), 'v:val =~ "\\V\\^".a:A')
+endfu
+
+fu! markdown#ex#open_link_history(...)
+  call s:assure_link_history()
+
+  if a:0
+    let title = a:1
+  else
+    call inputsave()
+    let title = input('Title> ', '',
+          \ 'customlist,markdown#ex#open_link_history_complete')
+    call inputrestore()
+  endif
+  for item in s:link_history
+    if item.title == title
+      call s:open(item.uri)
+      break
+    endif
+  endfor
+endfu
+
+fu! markdown#ex#open_link_history_complete(A, L, P)
+  call s:assure_link_history()
+  let titles = map(copy(s:link_history), 'v:val.title')
+  return filter(titles, 'v:val =~ "\\v^".a:A')
 endfu
 
 let &cpo = s:save_cpo
