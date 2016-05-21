@@ -149,5 +149,20 @@ fu! s:between(list, n)
   return [-1, -1]
 endfu
 
+fu! markdown#ex#search_header(flags)
+  let s:headers = filter(getline(0, line('$')), 'v:val =~ "\\v^#+"')
+  let s:headers = map(s:headers, 'substitute(v:val, "\\v^#+\\s*", "", "")')
+  call inputsave()
+  let key = input('/', '', 'customlist,markdown#ex#complete_header')
+  call inputrestore()
+  if !empty(key)
+    call search('\V\^#\+\s\*'.key.'\$', a:flags)
+  endif
+endfu
+
+fu! markdown#ex#complete_header(A, L, P)
+  return filter(copy(s:headers), 'v:val =~ "\\V\\^".a:A')
+endfu
+
 let &cpo = s:save_cpo
 unlet s:save_cpo

@@ -19,6 +19,7 @@ This provides the below features:
 + Jump to next/previous links
 + Open links by gx with additional features
 + Text object for fenced code blocks
++ Search headers with command-completion
 
 Please check `:help vim-markdown-ex` to see more details.
 

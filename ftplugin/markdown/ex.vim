@@ -60,4 +60,20 @@ if !hasmapto('<Plug>(markdown-ex-textobj-code-block-a)')
   endif
 endif
 
+nnoremap <silent> <buffer> <Plug>(markdown-ex-search-header-forward)
+      \ :<c-u>call markdown#ex#search_header('w')<cr>
+nnoremap <silent> <buffer> <Plug>(markdown-ex-search-header-backward)
+      \ :<c-u>call markdown#ex#search_header('bw')<cr>
+
+if !hasmapto('<Plug>(markdown-ex-search-header-forward)')
+  if maparg('g/', 'n') ==# ''
+    nmap <buffer> g/ <Plug>(markdown-ex-search-header-forward)
+  endif
+endif
+if !hasmapto('<Plug>(markdown-ex-search-header-backward)')
+  if maparg('g?', 'n') ==# ''
+    nmap <buffer> g? <Plug>(markdown-ex-search-header-backward)
+  endif
+endif
+
 setlocal foldtext=markdown#ex#foldtext()

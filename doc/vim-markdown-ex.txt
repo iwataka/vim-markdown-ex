@@ -9,6 +9,7 @@ TOC                                                   *vim-markdown-ex-contents*
         CHECKBOX ................... |vim-markdown-ex-usage-checkbox|
         LINK ....................... |vim-markdown-ex-usage-link|
         TEXT-OBJECT ................ |vim-markdown-ex-usage-text-object|
+        SEARCH HEADERS ............. |vim-markdown-ex-usage-search-headers|
 
 ==============================================================================
 INTRO                                                    *vim-markdown-ex-intro*
@@ -52,6 +53,13 @@ TEXT-OBJECT                                  *vim-markdown-ex-usage-text-object*
 ic                     "a quoted string" or "a fenced code block"
 
 ac                     "inner quoted string" or "inner fenced code block"
+
+------------------------------------------------------------------------------
+SEARCH HEADERS                            *vim-markdown-ex-usage-search-headers*
+
+g/                     Search headers forward with command-completion
+
+g?                     Search headers backward with command-completion
 
 ==============================================================================
 vim:tw=78
