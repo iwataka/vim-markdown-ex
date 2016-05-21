@@ -24,6 +24,15 @@ This provides the below features:
 
 Please check `:help vim-markdown-ex` to see more details.
 
+## Installation
+
+If you don't have your favorite plug-in manager, I strongly recommend
+[vim-plug](https://github.com/junegunn/vim-plug).
+
+```vim
+Plug 'iwataka/vim-markdown-ex', { 'for': 'markdown', 'on': ['OpenLinkHistory'] }
+```
+
 ## Related Projects
 
 + [tpope/vim-markdown](https://github.com/tpope/vim-markdown)
