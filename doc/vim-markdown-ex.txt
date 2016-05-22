@@ -10,6 +10,7 @@ TOC                                                   *vim-markdown-ex-contents*
         LINK ....................... |vim-markdown-ex-usage-link|
         TEXT-OBJECT ................ |vim-markdown-ex-usage-text-object|
         SEARCH HEADERS ............. |vim-markdown-ex-usage-search-headers|
+    OPTIONS ........................ |vim-markdown-ex-options|
 
 ==============================================================================
 INTRO                                                    *vim-markdown-ex-intro*
@@ -62,6 +63,29 @@ SEARCH HEADERS                            *vim-markdown-ex-usage-search-headers*
 g/                     Search headers forward with command-completion
 
 g?                     Search headers backward with command-completion
+
+==============================================================================
+OPTIONS                                                *vim-markdown-ex-options*
+                                               *g:markdown_ex_link_history_path*
+>
+    let g:markdown_ex_link_history_path = expand('~/.cache/vim-markdown-ex/history.txt')
+<
+This specify the path saving the open-link history.
+
+------------------------------------------------------------------------------
+                                                *g:markdown_ex_link_history_max*
+>
+    let g:markdown_ex_link_history_max = 100
+<
+This specify the maximum number of history items.
+
+------------------------------------------------------------------------------
+                                                   *g:markdown_ex_auto_foldopen*
+>
+    let g:markdown_ex_auto_foldopen = &foldopen =~# 'search'
+<
+If this value is non-zero, this plug-in automatically open foldings when
+seaching headers.
 
 ==============================================================================
 vim:tw=78
