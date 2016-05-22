@@ -10,6 +10,9 @@ endif
 if !exists('g:markdown_ex_link_history_max')
   let g:markdown_ex_link_history_max = 100
 endif
+if !exists('g:markdown_ex_auto_foldopen')
+  let g:markdown_ex_auto_foldopen = &foldopen =~# 'search'
+endif
 
 let s:search_linkpat = '\v\[([^\]]+)\]\(\zs([^\)]+)\ze\)'
 let s:linkpat = '\v\[([^\]]+)\]\(([^\)]+)\)'
@@ -188,7 +191,19 @@ fu! markdown#ex#search_header(flags)
   call inputrestore()
   if !empty(key)
     call search('\V\^#\+\s\*'.key.'\$', a:flags)
+    if g:markdown_ex_auto_foldopen
+      call s:foldopen()
+    endif
   endif
+endfu
+
+fu! s:foldopen()
+  let i = 0
+  let level = foldlevel(line('.'))
+  while i < level
+    foldopen
+    let i += 1
+  endwhile
 endfu
 
 fu! markdown#ex#complete_header(A, L, P)
