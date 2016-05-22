@@ -85,7 +85,7 @@ This specify the maximum number of history items.
     let g:markdown_ex_auto_foldopen = &foldopen =~# 'search'
 <
 If this value is non-zero, this plug-in automatically open foldings when
-seaching headers.
+seaching links and headers.
 
 ==============================================================================
 vim:tw=78

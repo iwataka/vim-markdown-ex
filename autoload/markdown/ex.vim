@@ -50,6 +50,9 @@ fu! markdown#ex#next_link(flags, count)
     call search(s:search_linkpat, a:flags)
     let i += 1
   endwhile
+  if g:markdown_ex_auto_foldopen
+    call s:foldopen()
+  endif
 endfu
 
 fu! markdown#ex#open_link()
