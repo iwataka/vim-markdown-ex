@@ -73,13 +73,12 @@ fu! markdown#ex#open_link()
       let text = txt
     endif
   endwhile
-  if !empty(text)
-    call s:open_link(text)
-  endif
+  call s:open_link(text)
 endfu
 
 fu! s:open_link(text)
   let uri = substitute(a:text, s:linkpat, '\2', '')
+  let uri = empty(uri) ? expand('<cfile>') : uri
   if uri =~ '\v^http://|^https://'
     call s:assure_link_history()
     let item = {
@@ -109,7 +108,9 @@ fu! s:open_link(text)
     else
       let uri = dir.'/'.uri
     endif
-    exe 'edit '.uri
+    if filereadable(uri) || isdirectory(uri)
+      exe 'edit '.uri
+    endif
   endif
 endfu
 
