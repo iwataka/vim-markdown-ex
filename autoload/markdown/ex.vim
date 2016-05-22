@@ -83,7 +83,7 @@ fu! s:open_link(text)
           \ 'title': substitute(a:text, s:linkpat, '\1', ''),
           \ 'uri': substitute(a:text, s:linkpat, '\2', '')
           \ }
-    call insert(s:link_history, item, 0)
+    call s:add_history(item)
     call s:open(uri)
   elseif uri =~ '\v^#'
     let pat = substitute(uri, '\v^#', '\\v^#+\\s*', '')
@@ -118,10 +118,26 @@ fu! s:assure_link_history()
     let s:link_history = eval(str)
     augroup vim_markdown_ex
       autocmd!
-      autocmd VimLeavePre *
-            \ call writefile([string(s:link_history)], g:markdown_ex_link_history_path)
+      autocmd VimLeavePre * call s:save_history()
     augroup END
   endif
+endfu
+
+fu! s:add_history(item)
+  let i = 0
+  while i < len(s:link_history)
+    if s:link_history[i].title == a:item.title
+      call remove(s:link_history, i)
+      break
+    endif
+    let i += 1
+  endwhile
+  call insert(s:link_history, a:item, 0)
+endfu
+
+fu! s:save_history()
+  let str = string(s:link_history[0:g:markdown_ex_link_history_max])
+  call writefile([str], g:markdown_ex_link_history_path)
 endfu
 
 fu! s:open(url)
