@@ -53,9 +53,9 @@ gx                     Open the nearest URI on the current line.
 ------------------------------------------------------------------------------
 TEXT-OBJECT                                  *vim-markdown-ex-usage-text-object*
 
-ic                     "a quoted string" or "a fenced code block"
+ac                     "a quoted string" or "a fenced code block"
 
-ac                     "inner quoted string" or "inner fenced code block"
+ic                     "inner quoted string" or "inner fenced code block"
 
 ------------------------------------------------------------------------------
 SEARCH HEADERS                            *vim-markdown-ex-usage-search-headers*
