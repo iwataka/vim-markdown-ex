@@ -145,7 +145,9 @@ fu! s:save_history()
 endfu
 
 fu! s:open(url)
-  if has('mac')
+  if has_key(g:, 'netrw_browsex_viewer')
+    let cmd = g:netrw_browsex_viewer
+  elseif has('mac')
     let cmd = 'open'
   elseif has('win32unix') && executable('cygstart')
     let cmd = 'cygstart'
