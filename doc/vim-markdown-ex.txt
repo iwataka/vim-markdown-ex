@@ -88,4 +88,4 @@ If this value is non-zero, this plug-in automatically open foldings when
 seaching links and headers.
 
 ==============================================================================
-vim:tw=78
+vim:ft=help:tw=78
